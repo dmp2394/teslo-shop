@@ -1,7 +1,7 @@
 import { AdminTitle } from "@/admin/components/AdminTitle"
 import { CustomPagination } from "@/components/custom/CustomPagination"
 import { Button } from "@/components/ui/button"
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { PlusIcon } from "lucide-react"
 import { Link } from "react-router"
 
