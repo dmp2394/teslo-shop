@@ -5,6 +5,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { PlusIcon } from "lucide-react"
 import { Link } from "react-router"
 
+
+
+
 export const AdminProductsPage = () => {
   return (
     <>
