@@ -44,7 +44,7 @@ export const AdminSidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) 
 
 
   const isActiveRoute = (to: string) => {
-    // TODO: ajustarlo cuando estemos en la pantalla de producto
+    // TODO: ajustarlo en pantalla de producto
     if (pathname.includes('/admin/products/') && to === '/admin/products')
       return true;
 

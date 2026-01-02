@@ -1,4 +1,7 @@
 export const getInitials = (fullname: string = '') => {
+    if (fullname === '')
+        return '';
+
     return (
         fullname
             .trim()

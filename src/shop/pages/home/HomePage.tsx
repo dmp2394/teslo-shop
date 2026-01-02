@@ -7,13 +7,12 @@ export const HomePage = () => {
 
   const { data } = useProducts();
 
-  if (!data) return <div>Loading...</div>;
 
   return (
     <>
       <CustomJumbotron title="Todos los productos" />
-      <ProductsGrid products={data.products || []} />
-      <CustomPagination totalPages={data.pages || 0} />
+      <ProductsGrid products={data?.products || []} />
+      <CustomPagination totalPages={data?.pages || 0} />
     </>
   )
 }
