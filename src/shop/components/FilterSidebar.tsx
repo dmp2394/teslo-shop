@@ -17,13 +17,17 @@ export const FilterSidebar = () => {
   const currentSizes = searchParams.get('sizes')?.split(',') || [];
   const currentPrice = searchParams.get('price') || 'any';
 
+
   const handleSizeChanged = (size: string) => {
-    const newSizes = currentSizes.includes(size)
-      ? currentSizes.filter(s => s !== size)
-      : [...currentSizes, size];
+
+    const normalizedSizes = currentSizes.filter(Boolean);
+
+    const newSizes = normalizedSizes.includes(size)
+      ? normalizedSizes.filter(s => s !== size)
+      : [...normalizedSizes, size];
 
     searchParams.set('page', '1');
-    searchParams.set('sizes', newSizes.join(','))
+    searchParams.set('sizes', newSizes.join())
     setSearchParams(searchParams);
   }
 
@@ -42,12 +46,12 @@ export const FilterSidebar = () => {
     { id: "xxl", label: "XXL" },
   ];
 
-  const colors = [
-    { id: "black", label: "Negro", color: "bg-black" },
-    { id: "white", label: "Blanco", color: "bg-white border" },
-    { id: "grey", label: "Gris", color: "bg-gray-400" },
-    { id: "navy", label: "Azul Marino", color: "bg-blue-900" },
-  ];
+  // const colors = [
+  //   { id: "black", label: "Negro", color: "bg-black" },
+  //   { id: "white", label: "Blanco", color: "bg-white border" },
+  //   { id: "grey", label: "Gris", color: "bg-gray-400" },
+  //   { id: "navy", label: "Azul Marino", color: "bg-blue-900" },
+  // ];
 
   return (
     <div className="w-64 space-y-6">

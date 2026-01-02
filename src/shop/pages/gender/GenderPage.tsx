@@ -7,7 +7,7 @@ import { useParams } from 'react-router'
 export const GenderPage = () => {
   const { gender } = useParams();
   const { data } = useProducts();
-  
+
   if (!data) return <div>Loading...</div>;
 
   const genderLabel = gender === 'men' ? 'Hombres' : gender === 'women' ? 'Mujeres' : 'Niños'
@@ -16,8 +16,8 @@ export const GenderPage = () => {
   return (
     <>
       <CustomJumbotron title={`Productos para ${genderLabel}`} />
-      <ProductsGrid products={data.products || []} />
-      <CustomPagination totalPages={7} />
+      <ProductsGrid products={data?.products || []} />
+      <CustomPagination totalPages={data?.pages || 1} />
     </>
   )
 }
