@@ -2,31 +2,41 @@ import type { User } from '@/interfaces/user.interface';
 import { create } from 'zustand'
 import { loginAction } from '../actions/login.action';
 import { checkAuthAction } from '../actions/check-auth.action';
+import { registerAction } from '../actions/register.action';
 
 type AuthStatus = 'authenticated' | 'not-authenticated' | 'checking';
 
 
 type AuthState = {
-  // props
+  // Properties
   user: User | null;
   token: string | null;
   authStatus: AuthStatus;
 
-  // getters
+  // Getters
+  isAdmin: () => boolean;
 
-  // actions
+  // Actions
   login: (email: string, password: string) => Promise<Boolean>;
   logout: () => void;
+  register: (fullName: string, email: string, password: string) => Promise<Boolean>;
   checkAuthStatus: () => Promise<Boolean>;
 };
 
-export const useAuthStore = create<AuthState>()((set) => ({
-  // implementacion del store
+export const useAuthStore = create<AuthState>()((set, get) => ({
+  // Properties
   user: null,
   token: null,
   authStatus: 'checking',
 
-  // actions
+  // Getters
+  isAdmin: () => {
+    const roles = get().user?.roles || [];
+
+    return roles.includes('admin');
+  },
+
+  // Actions
   login: async (email: string, password: string) => {
 
     try {
@@ -51,6 +61,24 @@ export const useAuthStore = create<AuthState>()((set) => ({
   },
 
 
+  register: async (fullName: string, email: string, password: string) => {
+
+    try {
+      const data = await registerAction(fullName, email, password);
+      localStorage.setItem('token', data.token);
+
+      set({ user: data.user, token: data.token, authStatus: 'authenticated' });
+      
+      return true;
+      
+    } catch (error) {
+
+      return false;
+    }
+
+  },
+
+
   checkAuthStatus: async () => {
     try {
 
@@ -61,7 +89,9 @@ export const useAuthStore = create<AuthState>()((set) => ({
         token: token,
         authStatus: 'authenticated',
       });
+
       return true;
+
     } catch (error) {
       set({
         user: undefined,
@@ -70,6 +100,7 @@ export const useAuthStore = create<AuthState>()((set) => ({
       })
 
       return false;
+
     }
 
 

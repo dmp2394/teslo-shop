@@ -1,9 +1,9 @@
-export const getInitials = (fullname: string = '') => {
-    if (fullname === '')
+export const getInitials = (fullName: string = '') => {
+    if (fullName === '')
         return '';
 
     return (
-        fullname
+        fullName
             .trim()
             .split(/\s+/)
             .map(word => word[0].toUpperCase())
