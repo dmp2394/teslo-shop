@@ -37,11 +37,9 @@ export const RegisterPage = () => {
       const errorMessage = error as string[];
 
       toast.error(
-        <>
-          {errorMessage.map((msg, i) => (
-            <div key={i}>{"- "+msg}</div>
-          ))}
-        </>
+        errorMessage.map((msg, i) => (
+          <div key={i}>{"- " + msg}</div>
+        ))
       );
 
       setIsPosting(false);
