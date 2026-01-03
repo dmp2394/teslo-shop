@@ -1,5 +1,14 @@
 import { tesloApi } from "@/api/tesloApi"
 import type { AuthResponse } from "../interfaces/auth.response";
+import type { AxiosError } from "axios";
+
+export interface ApiError {
+    message: string[];
+    error: string;
+    statusCode: number;
+}
+
+
 
 export const registerAction = async (fullName: string, email: string, password: string): Promise<AuthResponse> => {
     try {
@@ -13,7 +22,15 @@ export const registerAction = async (fullName: string, email: string, password: 
 
 
     } catch (error) {
-        console.log(error);
-        throw error;
+
+        const axiosError = error as AxiosError<ApiError>;
+
+        const apiErrorMessage = axiosError.response?.data.message;
+
+        if (apiErrorMessage) {
+            throw apiErrorMessage;
+        }
+
+        throw ["Error inesperado"];
     }
 }

@@ -19,7 +19,7 @@ type AuthState = {
   // Actions
   login: (email: string, password: string) => Promise<Boolean>;
   logout: () => void;
-  register: (fullName: string, email: string, password: string) => Promise<Boolean>;
+  register: (fullName: string, email: string, password: string) => Promise<void>;
   checkAuthStatus: () => Promise<Boolean>;
 };
 
@@ -63,18 +63,11 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
 
   register: async (fullName: string, email: string, password: string) => {
 
-    try {
-      const data = await registerAction(fullName, email, password);
-      localStorage.setItem('token', data.token);
+    // si hay error burbujea sola la excepcion al front
+    const data = await registerAction(fullName, email, password);
+    localStorage.setItem('token', data.token);
 
-      set({ user: data.user, token: data.token, authStatus: 'authenticated' });
-      
-      return true;
-      
-    } catch (error) {
-
-      return false;
-    }
+    set({ user: data.user, token: data.token, authStatus: 'authenticated' });
 
   },
 

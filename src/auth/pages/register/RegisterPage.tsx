@@ -28,17 +28,24 @@ export const RegisterPage = () => {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
 
-    const isValid = await register(fullName, email, password);
-
-
-    if (isValid) {
+    try {
+      await register(fullName, email, password);
       navigate('/');
       return;
-    }
+    } catch (error) {
 
-    
-    toast.error('Nombre, correo y/o contraseña inválidos');
-    setIsPosting(false);
+      const errorMessage = error as string[];
+
+      toast.error(
+        <>
+          {errorMessage.map((msg, i) => (
+            <div key={i}>{"- "+msg}</div>
+          ))}
+        </>
+      );
+
+      setIsPosting(false);
+    }
 
   }
 
