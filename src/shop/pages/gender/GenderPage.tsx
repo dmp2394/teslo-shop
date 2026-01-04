@@ -8,7 +8,6 @@ export const GenderPage = () => {
   const { gender } = useParams();
   const { data } = useProducts();
 
-  if (!data) return <div>Loading...</div>;
 
   const genderLabel = gender === 'men' ? 'Hombres' : gender === 'women' ? 'Mujeres' : 'Niños'
 

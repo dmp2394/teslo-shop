@@ -1,7 +1,12 @@
 import React from 'react';
 import { Search, Bell, MessageSquare, Settings } from 'lucide-react';
+import { useAuthStore } from '@/auth/store/auth.store';
+import { getInitials } from '../helpers/helpers';
 
-export const  AdminHeader: React.FC = () => {
+export const AdminHeader: React.FC = () => {
+  const { user } = useAuthStore();
+
+
   return (
     <header className="bg-white border-b border-gray-200 px-6 py-4 h-18">
       <div className="flex items-center justify-between">
@@ -23,17 +28,19 @@ export const  AdminHeader: React.FC = () => {
             <Bell size={20} />
             <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
           </button>
-          
+
           <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
             <MessageSquare size={20} />
           </button>
-          
+
           <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
             <Settings size={20} />
           </button>
 
           <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-sm cursor-pointer hover:shadow-lg transition-shadow">
-            JD
+            {
+              getInitials(user?.fullName)
+            }
           </div>
         </div>
       </div>
