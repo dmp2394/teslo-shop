@@ -7,7 +7,6 @@ import { Link } from "react-router"
 
 
 
-
 export const AdminProductsPage = () => {
   return (
     <>
