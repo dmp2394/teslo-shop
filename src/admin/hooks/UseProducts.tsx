@@ -1,3 +1,4 @@
+// TODO: DELETE
 import { useQuery } from "@tanstack/react-query";
 import { getProductsAction } from "../actions/get-products.action";
 import { useSearchParams } from "react-router";
