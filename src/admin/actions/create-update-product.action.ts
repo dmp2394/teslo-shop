@@ -2,6 +2,13 @@ import { tesloApi } from "@/api/tesloApi";
 import type { Product } from "@/interfaces/product.interface";
 import { sleep } from "@/lib/sleep";
 
+
+export interface FileUploadResponse {
+    secureUrl: string;
+    fileName: string;
+}
+
+
 export const createUpdateProductAction = async (
     productLike: Partial<Product> & { files?: File[] }
 ): Promise<Product> => {
@@ -25,7 +32,7 @@ export const createUpdateProductAction = async (
 
     const imagesToSave = images.map((image) => {
         if (image.includes('http')) return image.split('/').pop() || '';
-        
+
         return image;
     })
 
@@ -51,10 +58,6 @@ export const createUpdateProductAction = async (
 }
 
 
-export interface FileUploadResponse {
-    secureUrl: string;
-    fileName: string;
-}
 
 
 const uploadFiles = async (files: File[]) => {
