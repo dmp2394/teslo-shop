@@ -1,10 +1,7 @@
 import { Link } from "react-router"
 
-interface Props {
-    subtitle?: string;
-}
 
-export const CustomLogo = ({ subtitle = 'Shop'}: Props) => {
+export const CustomLogo = () => {
     return (
         <Link to='/' className="flex items-center whitespace-nowrap">
             <span className="font-montserrat font-bold text-xl m-0 whitespace-nowrap">
